@@ -17,7 +17,7 @@ RUN cd $HOME && curl http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-
 ENV JBOSS_HOME /opt/jboss/wildfly
 
 # Expose the ports we're interested in
-EXPOSE 8080
+EXPOSE 8080 9090
 
 # Get Postgres stuff
 RUN curl -o /tmp/psql-jdbc.jar https://jdbc.postgresql.org/download/postgresql-9.4-1201.jdbc41.jar
