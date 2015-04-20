@@ -30,6 +30,6 @@ RUN /tmp/config.sh
 RUN /opt/jboss/wildfly/bin/add-user.sh admin INSERTPASSWORD --silent
 
 # Use the modules
-ADD standalone.xml /opt/jboss/wildfly/standalone/configuration/
+# ADD standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
