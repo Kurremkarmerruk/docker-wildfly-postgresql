@@ -1,23 +1,4 @@
-# Copy of most of https://registry.hub.docker.com/u/jboss/wildfly/dockerfile/
-# to use JDK 8
-# Use latest jboss/base-jdk:8 image as the base
-FROM jboss/base-jdk:8
-
-# Set the WILDFLY_VERSION env variable
-ENV WILDFLY_VERSION 8.2.0.Final
-
-# $HOME appears to not be set
-ENV HOME /opt/jboss
-
-# Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
-# Make sure the distribution is available from a well-known place
-RUN cd $HOME && curl http://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz | tar zx && mv $HOME/wildfly-$WILDFLY_VERSION $HOME/wildfly
-
-# Set the JBOSS_HOME env variable
-ENV JBOSS_HOME /opt/jboss/wildfly
-
-# Expose the ports we're interested in
-EXPOSE 8080 9090
+FROM jboss/wildfly:latest
 
 # Get Postgres stuff
 RUN curl -o /tmp/psql-jdbc.jar https://jdbc.postgresql.org/download/postgresql-9.4-1201.jdbc41.jar
@@ -27,7 +8,9 @@ ADD batch.cli /tmp/
 
 # Set up modules
 RUN /tmp/config.sh
-RUN /opt/jboss/wildfly/bin/add-user.sh admin INSERTPASSWORD --silent
+
+# Add admin user
+RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#007 --silent
 
 # Use the modules
 # ADD standalone.xml /opt/jboss/wildfly/standalone/configuration/
