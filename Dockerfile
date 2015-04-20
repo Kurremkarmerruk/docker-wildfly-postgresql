@@ -20,4 +20,9 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#007 --silent
 # ATTN: Attempting user creation instead
 # RUN rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/current
 
+# Create wildfly group and user, set file ownership to that user
+RUN groupadd -r wildfly -g 433 && \
+    useradd -u 431 -r -g wildfly -d /opt/jboss/wildfly -s /sbin/nologin -c "Wildfly user" wildfly && \
+    chown -R wildfly:wildfly /opt/jboss/wildfly
+
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0" "-Djboss.management.http.port" "9090"]
