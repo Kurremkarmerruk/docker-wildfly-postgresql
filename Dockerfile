@@ -13,9 +13,11 @@ RUN /tmp/config.sh
 RUN /opt/jboss/wildfly/bin/add-user.sh admin Admin#007 --silent
 
 # Use the modules
+# ATTN: Configuring standalone via jboss_cli instead
 # ADD standalone.xml /opt/jboss/wildfly/standalone/configuration/
 
 # Remove standalone_xml_history/current directory
-RUN rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/current
+# ATTN: Attempting user creation instead
+# RUN rm -rf /opt/jboss/wildfly/standalone/configuration/standalone_xml_history/current
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0" "-Djboss.management.http.port" "9090"]
