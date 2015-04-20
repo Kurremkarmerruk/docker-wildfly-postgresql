@@ -20,8 +20,8 @@ wait_for_wildfly
 echo "==> Executing jdbc driver script..."
 $JBOSS_CLI -c --file=`dirname "$0"`/batch.cli
 
-echo "==> Removing old snapshots..."
-$JBOSS_CLI -c ":delete-snapshot(name=\"all\")"
+# echo "==> Removing old snapshots..."
+# $JBOSS_CLI -c ":delete-snapshot(name=\"all\")"
 
 echo "==> Shutting down WildFly..."
 if [ "$JBOSS_MODE" = "standalone" ]; then
