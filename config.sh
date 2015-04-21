@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Usage: execute.sh [WildFly mode] [configuration file]
+#
+# The default mode is 'standalone' and default configuration is based on the
+# mode. It can be 'standalone.xml' or 'domain.xml'.
+
 JBOSS_HOME=/opt/jboss/wildfly
 JBOSS_CLI=$JBOSS_HOME/bin/jboss-cli.sh
 JBOSS_MODE=${1:-"standalone"}
@@ -20,7 +25,7 @@ wait_for_wildfly
 echo "==> Executing jdbc driver script..."
 $JBOSS_CLI -c --file=`dirname "$0"`/batch.cli
 
-# echo "==> Removing old snapshots..."
+# echo "==> Removing old snapshots..."snapshots...
 # $JBOSS_CLI -c ":delete-snapshot(name=\"all\")"
 
 echo "==> Shutting down WildFly..."

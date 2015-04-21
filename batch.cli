@@ -2,5 +2,6 @@ batch
 
 module add --name=org.postgresql --resources=/tmp/psql-jdbc.jar:/tmp/postgis-jdbc.jar --dependencies=javax.api,javax.transaction.api
 /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)
+data-source add --name=PostgrePool --jndi-name=:java:jboss/datasources/PGDS --connection-url=jdbc:postgresql://$PG_PORT_5432_TCP_ADDR:$PG_PORT_5432_TCP_PORT --driver-name=postgresql --user-name=postgres
 
 run-batch
